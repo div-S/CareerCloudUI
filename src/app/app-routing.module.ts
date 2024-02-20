@@ -5,6 +5,7 @@ import { JobListingComponent } from './components/job-listing/job-listing.compon
 import { CreateNewJobComponent } from './components/create-new-job/create-new-job.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
+import { authGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'register',
@@ -31,7 +33,7 @@ const routes: Routes = [
   {
     path: 'create-job',
     component: CreateNewJobComponent,
-    //canActivate: [AuthService],
+    canActivate: [authGuard],
   },
   {
     path: '**',

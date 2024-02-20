@@ -14,7 +14,12 @@ export class AuthService {
       () => {
         this.loggedIn = true;
         localStorage.setItem('token', 'true');
-        this.router.navigate(['/dashboard']); //Admin
+
+        if (email.toLowerCase().includes('admin')) {
+          this.router.navigate(['/dashboard']); //Admin
+        } else {
+          this.router.navigate(['/jobs']);
+        }
       },
       (err) => {
         alert(err.message);
@@ -52,5 +57,13 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return this.loggedIn;
+  }
+
+  async isAdmin(): Promise<boolean> {
+    const currentUser = await this.fireauth.currentUser;
+    if (currentUser && currentUser.email) {
+      return currentUser.email.toLowerCase().includes('admin');
+    }
+    return false;
   }
 }

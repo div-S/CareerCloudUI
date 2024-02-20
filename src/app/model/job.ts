@@ -2,9 +2,11 @@ import { JobType } from './job-type';
 
 export interface Job {
   id: string;
-  title: string;
+  jobRole: string;
+  expRequired: string;
+  skills: string;
   company: string;
   location: string;
   jobType: JobType;
-  description: string;
+  jobDescription: string;
 }
